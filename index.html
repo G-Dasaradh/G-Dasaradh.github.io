@@ -1,34 +1,953 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sai Dasaradharam G | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Backend Engineer specializing in IAM, distributed systems, and scalable Java microservices.">
+    <meta property="og:title" content="Sai Dasaradharam G – Backend Engineer">
+
+    <title>Sai Dasaradharam G — Software Engineer | IAM & Distributed Systems</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --accent: #00ffe7;
+            --bg: #111215;
+            --bg2: #18191d;
+            --text: #f7f7f7;
+            --muted: #7fffd4;
+            --card: #18191d;
+            --border: #23242a;
+            --shadow: 0 4px 32px #00ffe71a;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%; min-height: 100vh;
+            background: var(--bg); color: var(--text);
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+        body { overflow-x: hidden; }
+        header.navbar {
+            width: 100%; position: fixed; top: 0; left: 0; z-index: 100;
+            background: rgba(17,18,21,0.96); backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 48px; border-bottom: 1.5px solid var(--accent);
+            box-shadow: 0 2px 24px #00ffe71a;
+            font-family: inherit;
+            animation: headerFadeIn 1.2s cubic-bezier(.77,0,.18,1) 0.1s both;
+        }
+        @keyframes headerFadeIn { from { opacity: 0; transform: translateY(-40px);} to { opacity: 1; transform: translateY(0);} }
+        .logo {
+            font-size: 1.1rem; font-weight: 700; letter-spacing: 0.5px;
+            color: var(--accent); text-shadow: 0 2px 12px #00ffe733;
+            transition: letter-spacing 0.3s;
+        }
+        .logo:hover { letter-spacing: 2px; }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a {
+            color: var(--text); text-decoration: none; font-weight: 500;
+            font-size: 1.04rem; letter-spacing: 0.5px; padding: 8px 18px;
+            border-radius: 8px; transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            position: relative; z-index: 1;
+        }
+        .nav-links a:hover, .nav-links a:focus {
+            background: var(--accent); color: #111215; box-shadow: 0 2px 16px #00ffe733; outline: none;
+        }
+        .cv-btn {
+            background: var(--accent); color: #111215 !important; font-weight: 700;
+            border-radius: 10px; padding: 10px 22px !important; box-shadow: 0 2px 16px #00ffe733;
+            border: none; margin-left: 10px; display: inline-block; position: relative;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+        .cv-btn:hover, .cv-btn:focus {
+            background: #fff; color: var(--accent) !important; box-shadow: 0 4px 24px #00ffe755; outline: none;
+        }
+        @media (max-width: 700px) {
+            .nav-links { gap: 10px; }
+            .nav-links a, .cv-btn { font-size: 0.97rem; padding: 7px 10px !important; }
+            header.navbar { padding: 12px 8px; }
+        }
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column;
+            padding: 0 24px; background: linear-gradient(120deg, var(--bg) 80%, #00ffe71a 100%);
+            position: relative; overflow: hidden;
+        }
+        .hero-content { text-align: center; margin-top: 110px; animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 0.3s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(60px);} to { opacity: 1; transform: translateY(0);} }
+        .hero-title {
+            font-size: clamp(2.7rem, 8vw, 5.5rem); font-weight: 900; letter-spacing: -2px; line-height: 1;
+            background: linear-gradient(90deg, var(--accent), #fff 60%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            filter: drop-shadow(0 2px 16px #00ffe733);
+            animation: popIn 1.1s cubic-bezier(.77,0,.18,1) 0.5s both;
+        }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8);}
+            80% { opacity: 1; transform: scale(1.05);}
+            100% { opacity: 1; transform: scale(1);}
+        }
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 4vw, 2.1rem); font-weight: 400; color: var(--muted);
+            margin: 18px 0 32px 0; letter-spacing: 0.5px; opacity: 0.85;
+            animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 0.7s both;
+        }
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.18rem); line-height: 1.7; max-width: 540px; margin: 0 auto 60px;
+            color: #b6f0e6; opacity: 0.92; animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 0.9s both;
+        }
+        .scroll-indicator {
+            margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 6px;
+            cursor: pointer; opacity: 0.7; transition: opacity 0.2s;
+            animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 1.1s both;
+        }
+        .scroll-indicator:hover { opacity: 1; }
+        .scroll-line {
+            width: 2px; height: 36px;
+            background: linear-gradient(180deg, var(--accent), transparent 90%);
+            border-radius: 2px; animation: scrollPulse 1.5s infinite;
+        }
+        @keyframes scrollPulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        .floating-accent {
+            position: absolute; top: 10%; left: 80%; width: 160px; height: 160px;
+            background: radial-gradient(circle at 60% 40%, var(--accent) 0%, transparent 80%);
+            opacity: 0.13; border-radius: 50%; pointer-events: none;
+            animation: floatAccent 7s ease-in-out infinite alternate; z-index: 0;
+        }
+        @keyframes floatAccent { 0% { transform: translateY(0) scale(1);} 100% { transform: translateY(30px) scale(1.1);} }
+        .about {
+            min-height: 70vh; padding: 120px 0 60px 0; max-width: 1100px; margin: 0 auto;
+            display: flex; flex-direction: column; align-items: center; gap: 48px;
+            animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 1.1s both;
+        }
+        .section-title {
+            font-size: 1.05rem; text-transform: uppercase; letter-spacing: 4px; color: var(--accent);
+            opacity: 0.7; margin-bottom: 18px; font-weight: 600; text-align: center;
+            animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 1.2s both;
+        }
+        .about-grid {
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; width: 100%; align-items: stretch;
+        }
+        .about-card {
+            background: var(--card); border-radius: 22px; box-shadow: var(--shadow); border: 1px solid var(--border);
+            padding: 40px 36px; display: flex; flex-direction: column; justify-content: center;
+            animation: cardFadeIn 1.2s cubic-bezier(.77,0,.18,1) 1.3s both; position: relative; overflow: hidden;
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+        .about-card:hover { box-shadow: 0 8px 40px #00ffe733; border-color: var(--accent);}
+        @keyframes cardFadeIn { from { opacity: 0; transform: translateY(40px);} to { opacity: 1; transform: translateY(0);} }
+        .about-card::before {
+            content: ""; position: absolute; top: -40px; left: -40px; width: 120px; height: 120px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 80%);
+            opacity: 0.09; z-index: 0; pointer-events: none; animation: floatAccent 6s ease-in-out infinite alternate;
+        }
+        .about-text {
+            font-size: 1.18rem; line-height: 1.8; color: #e0e0e0; font-weight: 300; z-index: 1; position: relative;
+            animation: fadeInLeft 1.1s cubic-bezier(.77,0,.18,1) 1.4s both;
+        }
+        @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-40px);} to { opacity: 1; transform: translateX(0);} }
+        .about-details {
+            display: flex; flex-direction: column; gap: 22px; z-index: 1; position: relative;
+            animation: fadeInRight 1.1s cubic-bezier(.77,0,.18,1) 1.5s both;
+        }
+        @keyframes fadeInRight { from { opacity: 0; transform: translateX(40px);} to { opacity: 1; transform: translateX(0);} }
+        .detail-item {
+            display: flex; align-items: center; gap: 16px; padding: 0 0 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06); transition: background 0.2s;
+        }
+        .detail-item:last-child { border-bottom: none; }
+        .detail-icon { font-size: 1.3rem; color: var(--accent); opacity: 0.7; min-width: 28px; text-align: center; }
+        .detail-label {
+            font-size: 0.92rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted);
+            margin-bottom: 2px; opacity: 0.7; font-weight: 500;
+        }
+        .detail-value { font-size: 1.08rem; font-weight: 500; color: var(--text); }
+        @media (max-width: 900px) {
+            .about-grid { grid-template-columns: 1fr; gap: 32px; }
+            .about-card { padding: 32px 16px; }
+            .about { padding: 90px 8px 40px 8px; }
+        }
+        @media (max-width: 600px) {
+            .hero { padding: 0 4px; }
+            .about { padding: 70px 2px 30px 2px; }
+            .about-card { padding: 22px 6px; }
+            .hero-title { font-size: 2.1rem; }
+            .about-text, .detail-value { font-size: 1rem; }
+        }
+        .projects, .experience, .contact {
+            max-width: 1100px; margin: 0 auto 80px auto; padding: 60px 0 0 0;
+            animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) both;
+        }
+        .projects-3col {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px;
+        }
+        .project-card {
+            background: var(--card); border-radius: 18px; box-shadow: var(--shadow); border: 1px solid var(--border);
+            padding: 32px 28px 28px 28px; display: flex; flex-direction: column; justify-content: flex-start;
+            min-height: 170px; position: relative; transition: box-shadow 0.3s, border-color 0.3s, transform 0.2s;
+            z-index: 1; animation: cardFadeIn 1.2s cubic-bezier(.77,0,.18,1) both;
+        }
+        .project-card:hover {
+            box-shadow: 0 8px 40px #00ffe733; border-color: var(--accent); transform: translateY(-6px) scale(1.025);
+        }
+        .project-title-lg { font-size: 1.45rem; font-weight: 800; letter-spacing: 0.5px; color: #fff; margin-bottom: 12px; }
+        .project-card p { color: #b6f0e6; font-size: 1.05rem; margin-bottom: 18px; line-height: 1.5; }
+        .read-more {
+            display: block; color: #aaa; max-height: 0; overflow: hidden;
+            transition: max-height 0.5s ease; margin-top: 8px;
+        }
+        .project-card:hover .read-more { max-height: 400px; }
+        .slide-in-left { animation: slideInLeft 1.1s cubic-bezier(.77,0,.18,1) both; }
+        .slide-in-right { animation: slideInRight 1.1s cubic-bezier(.77,0,.18,1) both; }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-60px);} to { opacity: 1; transform: translateX(0);} }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(60px);} to { opacity: 1; transform: translateX(0);} }
+        @media (max-width: 1100px) { .projects-3col { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 900px) {
+            .projects-grid { grid-template-columns: 1fr; gap: 24px; }
+            .projects, .experience, .contact { padding: 36px 8px 0 8px; }
+            .achievement-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 700px) { .projects-3col { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) {
+            .projects, .experience, .contact { padding: 24px 2px 0 2px; margin-bottom: 40px; }
+            .project-card { padding: 16px 8px 14px 8px; min-height: 120px; }
+        }
+        .timeline {
+            position: relative; margin: 20px 0; padding-left: 40px; border-left: 2px solid #999;
+        }
+        .timeline-item { position: relative; margin-bottom: 50px; }
+        .timeline-dot {
+            width: 16px; height: 16px; background-color: #00ffe0; border-radius: 50%;
+            position: absolute; left: -9px; top: 6px; box-shadow: 0 0 6px rgba(0, 255, 224, 0.7);
+        }
+        .timeline-content {
+            background-color: #121212; padding: 20px; border-radius: 10px; color: #ccc;
+            transition: all 0.3s ease; box-shadow: 0 0 8px rgba(255, 255, 255, 0.05); position: relative;
+        }
+        .timeline-content h3 { font-size: 1.3rem; color: #fff; margin-bottom: 6px; }
+        .timeline-content .date { font-size: 0.9rem; color: #888; display: block; margin-bottom: 8px; }
+        .know-more {
+            display: block; max-height: 0; overflow: hidden; color: #aaa;
+            transition: max-height 0.5s ease; margin-top: 8px; font-size: 0.95rem; line-height: 1.5;
+        }
+        .timeline-content:hover .know-more { max-height: 300px; }
+        @media (max-width: 700px) {
+            .timeline { padding-left: 20px; }
+            .timeline-content { padding: 16px; }
+        }
+        .achievements {
+            padding: 60px 20px; background-color: #0a0a0a; color: #eee;
+        }
+        .achievement-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;
+        }
+        .achievement-card {
+            background: rgba(18, 18, 18, 0.8); border-left: 4px solid #00ffe0;
+            padding: 24px 20px; border-radius: 12px; box-shadow: 0 0 10px rgba(0, 255, 224, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .achievement-card h3 { font-size: 1.25rem; color: #00ffe0; margin-bottom: 12px; }
+        .achievement-card p { font-size: 0.95rem; color: #ccc; line-height: 1.6; }
+        .achievement-card:hover {
+            transform: translateY(-6px); box-shadow: 0 0 20px rgba(0, 255, 224, 0.15);
+        }
+        @media (max-width: 900px) { .achievement-grid { grid-template-columns: 1fr; } }
+        .fun-footer {
+            width: 100%; background: linear-gradient(90deg, #00ffe71a 0%, var(--bg2) 100%);
+            color: var(--text); padding: 38px 0 24px 0; text-align: center;
+            border-top: 1px solid var(--border); box-shadow: 0 -2px 24px #00ffe71a;
+            margin-top: 60px; position: relative; z-index: 10; font-family: inherit;
+            animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 0.2s both;
+        }
+        .footer-quote {
+            font-size: 1.18rem; font-style: italic; color: var(--muted); margin-bottom: 18px;
+            letter-spacing: 0.2px; text-shadow: 0 2px 12px #00ffe733;
+            animation: popIn 1.1s cubic-bezier(.77,0,.18,1) 0.3s both;
+        }
+        .footer-contact {
+            display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 8px;
+            font-size: 1.08rem; animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 0.5s both;
+        }
+        .footer-contact a {
+            color: var(--accent); text-decoration: none; font-weight: 600;
+            transition: color 0.2s, text-shadow 0.2s; display: inline-flex; align-items: center;
+            gap: 8px; padding: 4px 10px; border-radius: 6px;
+        }
+        .footer-contact a:hover {
+            color: #000000; background: var(--accent); text-shadow: 0 2px 12px #00ffe733;
+        }
+        .footer-contact i { font-size: 1.15em; opacity: 0.8; }
+        @media (max-width: 600px) {
+            .fun-footer { padding: 24px 2px 14px 2px; }
+            .footer-contact { gap: 12px; font-size: 0.98rem; flex-direction: column; }
+            .footer-quote { font-size: 1rem; }
+        }
+    </style>
 </head>
 <body>
-  <canvas id="bgCanvas"></canvas>
-  <div class="main-container">
-  <div class="profile">
-    <img src="assets/sai.jpg" alt="Sai's Profile Photo" class="profile-pic" />
-  </div>
-  <h1 class="title">Sai Dasaradharam G</h1>
-  <h2><p class="subtitle">Backend Developer | Multi-Tenant SaaS | IAM</p></h2>
+    <div class="floating-accent"></div>
+    <header class="navbar">
+        <div class="logo">Sai Dasaradharam G</div>
+        <nav class="nav-links">
+            <a href="#skills">Skills</a> 
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#achievements">Achievements</a>
+            <a href="assets/sai_cv.pdf" download class="cv-btn">Resume</a>
+        </nav>
+    </header>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">SOFTWARE<br>ENGINEER</h1>
+            <p class="hero-subtitle">Backend-Focused Engineer</p>
+            <p class="hero-description">
+                Building robust, secure, and scalable Identity & Access Management (IAM) microservices.<br>
+                3+ years experience in Java, distributed systems, and performance optimization.<br>
+                Passionate about global-scale performance, reliability, and elegant infrastructure.
+            </p>
+        </div>
+        <div class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})"></div>
+            <span style="font-size:0.95rem; color:var(--muted);">Scroll down</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <div class="section-title">About Me</div>
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="about-text">
+                    <span style="font-size:1.5rem; color:var(--accent); font-weight:700; letter-spacing:1px; display:block; margin-bottom:14px; animation: popIn 1.1s cubic-bezier(.77,0,.18,1) 1.6s both;">Hello, I'm Sai!</span>
+                    I am a results-driven Software Engineer with 3+ years of experience specializing in Identity and Access Management (IAM)<br>
+                    As a Member Technical Staff at Zoho, I optimized multi-tenant architectures and high-volume data flows.<br>
+                    I have a proven track record of improving system efficiency, such as reducing bulk import times by 67% through strategic service-layer optimizations.<br><br>
+                    Experienced in implementing enterprise-grade microservices, identity management, and distributed systems.<br><br>
+                    I thrive on solving complex technical challenges and building systems that scale gracefully under pressure.<br>
+                    <span style="color:var(--muted); font-size:1.05rem; display:block; margin-top:18px;">Ready for my next challenge—let's build something amazing together.</span>
+                </div>
+            </div>
+            <div class="about-card about-details">
+                <div class="detail-item">
+                    <span class="detail-icon"><i class="fas fa-map-marker-alt"></i></span>
+                    <div>
+                        <div class="detail-label">Location</div>
+                        <div class="detail-value">Chennai, India</div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon"><i class="fas fa-graduation-cap"></i></span>
+                    <div>
+                        <div class="detail-label">Education</div>
+                        <div class="detail-value">B.E - Instrumentation & Control Engineering</div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon"><i class="fas fa-cogs"></i></span>
+                    <div>
+                        <div class="detail-label">Specialization</div>
+                        <div class="detail-value">Backend Development & Microservices</div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon"><i class="fas fa-envelope"></i></span>
+                    <div>
+                        <div class="detail-label">Email</div>
+                        <div class="detail-value">saidasaradharam9@gmail.com</div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon"><i class="fas fa-phone"></i></span>
+                    <div>
+                        <div class="detail-label">Phone</div>
+                        <div class="detail-value">+91 7871802093</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="contact">
-    <p class="contact-info">📧 saidasaradharam9@gmail.com</p>
-    <p class="contact-info">📞 +91 7871802093</p>
-  </div>
 
-  <ul class="highlights">
-    <li>👨‍💻 3+ Years Experience in Backend & Microservices</li>
-    <li>🚀 Improved system performance by 67% at Zoho</li>
-    <li>🏆 Indian Rank 408 – IEEEXtreme 15.0</li>
-  </ul>
+<!-- Technical Skills Section -->
+    <section class="skills" id="skills" style="max-width: 1100px; margin: 0 auto 80px auto; padding: 60px 0 0 0;">
+        <div class="section-title" style="margin-bottom:32px;">Technical Skills</div>
+        <div class="skills-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 0 16px;">
 
-  <div class="buttons">
-    <a href="assets/Sai Dasaradha Ram G - SDE.pdf" class="btn" >📄 Resume</a>
-    <a href="sai.html" class="btn fun">🧠 Dive In</a>
+            <!-- Category 1: Languages & Core Backend -->
+            <div class="skills-category">
+                <h4 style="font-size: 1.15rem; color: var(--accent); margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px;">Languages & Core</h4>
+                <p style="font-size: 1rem; color: #ccc; line-height: 1.7;">
+                    Java, Python, C++, JavaScript
+                </p>
+            </div>
+            
+            <!-- Category 2: Backend Frameworks & Architecture -->
+            <div class="skills-category">
+                <h4 style="font-size: 1.15rem; color: var(--accent); margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px;">Backend/Frameworks</h4>
+                <p style="font-size: 1rem; color: #ccc; line-height: 1.7;">
+                    Microservices, Django REST, REST APIs, OAuth2, JWT, ZQueue, Hypermem
+                </p>
+            </div>
+            
+            <!-- Category 3: Databases & Caching -->
+            <div class="skills-category">
+                <h4 style="font-size: 1.15rem; color: var(--accent); margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px;">Databases & Caching</h4>
+                <p style="font-size: 1rem; color: #ccc; line-height: 1.7;">
+                    PostgreSQL, MongoDB, Redis, Distributed File Systems (DFS)
+                </p>
+            </div>
+            
+            <!-- Category 4: Cloud, DevOps & Tools -->
+            <div class="skills-category">
+                <h4 style="font-size: 1.15rem; color: var(--accent); margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px;">Cloud, DevOps</h4>
+                <p style="font-size: 1rem; color: #ccc; line-height: 1.7;">
+                    Docker, AWS Basics, Linux, Git
+                </p>
+            </div>
+            
+            <!-- Category 5: Frontend & Others (To show Full-Stack capability) -->
+            <div class="skills-category">
+                <h4 style="font-size: 1.15rem; color: var(--accent); margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px;">Frontend & Others</h4>
+                <p style="font-size: 1rem; color: #ccc; line-height: 1.7;">
+                    React, Vite, Tailwind CSS, HTML, CSS, Ember.js, ML (TensorFlow, Keras)
+                </p>
+            </div>
+
+        </div>
+    </section>
+    <!-- End of Technical Skills Section -->
+
+    
+    <!-- Projects Section -->
+<section class="projects" id="projects">
+  <div class="section-title" style="margin-bottom:32px;">Projects</div>
+  <div class="projects-grid projects-3col">
+
+
+      <!-- Project 1 -->
+    <div class="project-card slide-in-left">
+      <h3 class="project-title-lg"> Voluntra </h3>
+      <p>
+        A NGO Management Platform
+        <span class="read-more">
+          The app is a multi-role platform designed for NGOs, volunteers, and corporate partners. Each type of user accesses the platform through a secure React + Django REST API system, where permissions and data visibility are tightly controlled through Role-Based Access Control (RBAC).
+        </span>
+      </p>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card slide-in-right">
+      <h3 class="project-title-lg">Brain Tumor Classification App</h3>
+      <p>
+        Android app using CNN to classify MRI scans into tumor categories.
+        <span class="read-more">
+          This mobile application leverages a Convolutional Neural Network (CNN) model trained on publicly available MRI datasets to accurately classify brain tumors into four categories: pituitary, glioma, meningioma, and no tumor. The app features a clean UI built using Android Studio, and processes user-uploaded images directly on the device to ensure data privacy. The model was optimized for mobile deployment using TensorFlow Lite, achieving fast inference times and high accuracy, making it a practical tool for early tumor detection.
+        </span>
+      </p>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card slide-in-left">
+      <h3 class="project-title-lg">Brain Tumor Detection Neural Network</h3>
+      <p>
+        Deep learning model using MRI images to predict tumor presence.
+        <span class="read-more">
+          This standalone deep learning model uses a custom-built neural network to classify MRI brain scans into tumor or non-tumor cases. Built using Keras and OpenCV, the project focused on extensive pre-processing techniques like histogram equalization and data augmentation. The model was trained on a balanced dataset, yielding over 92% validation accuracy. It also included heatmap visualizations (Grad-CAM) to explain the region of focus in scans, enhancing interpretability for medical professionals.
+        </span>
+      </p>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-card slide-in-right">
+      <h3 class="project-title-lg">Smart Home Automation (IoT)</h3>
+      <p>
+        Microcontroller-based smart home with automation and sensor control.
+        <span class="read-more">
+          This project showcases a miniature smart home built using Arduino Uno and IoT sensors such as DHT11, PIR, and LDR modules. The system enables automated lighting, temperature monitoring, and motion-based security using a combination of sensor feedback and conditional logic. It was showcased at a college expo and received praise for practical implementation and user-friendly interaction. The automation logic was coded in embedded C and integrated with a mobile-based control panel using Bluetooth modules for real-time control.
+        </span>
+      </p>
+    </div>
+
+    <!-- Project 5 -->
+    <div class="project-card slide-in-left">
+      <h3 class="project-title-lg">Custom CLI ToDo Manager</h3>
+      <p>
+        Migrated CLI ToDo app with Tomcat + SQL + OTP verification.
+        <span class="read-more">
+          Rebuilt an existing CLI-based ToDo list manager as a web-enabled Java application using Apache Tomcat. Integrated a MySQL backend for persistent task storage and implemented secure user registration using OTP verification via email and SMS, utilizing third-party APIs. The application supports multiple user sessions, task categories, and deadline-based notifications. This project reflects full-stack development proficiency, from system design to security and user experience.
+        </span>
+      </p>
+    </div>
+
+    <!-- Project 6 -->
+    <div class="project-card slide-in-right">
+      <h3 class="project-title-lg">MongoDB UI Form Integration</h3>
+      <p>
+        Designed dynamic forms with backend MongoDB storage.
+        <span class="read-more">
+          Built a full-stack web app where dynamic user input forms feed data directly into a NoSQL MongoDB backend. Used HTML, CSS, and vanilla JS for the frontend and Node.js for handling server-side operations. Designed the schema for flexible document storage and implemented form validations and error handling. This project highlights database flexibility, real-time updates, and practical integration of user-centric design in modern web development.
+        </span>
+      </p>
+    </div>
+
   </div>
-</div>
-</body> 
+</section>
+
+<!-- CSS -->
+<style>
+  .projects-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+
+  .project-card {
+    background-color: #121212;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .project-title-lg {
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .project-card p {
+    font-size: 0.95rem;
+    color: #ccc;
+    line-height: 1.5;
+  }
+
+  .read-more {
+    display: block;
+    color: #aaa;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    margin-top: 8px;
+  }
+
+  .project-card:hover .read-more {
+    max-height: 400px;
+  }
+
+  @media (max-width: 1100px) {
+    .projects-3col {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .projects-3col {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+<!-- Experience Section -->
+<section class="experience" id="experience">
+  <h1><div class="section-title" style="margin-bottom:32px;">Professional Experience</div></h1>
+  <div class="timeline">
+
+    <!-- Experience 1 -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content slide-in-left">
+        <h3>Member Technical Staff – Zoho</h3>
+        <span class="date">Jun 2023 – Present</span>
+        <p>Chennai, India</p>
+        <span class="know-more">Contributed to the backend development of Identity and Access Management (IAM) microservices. Optimized performance by 80% using Java microservices (ZQueue) and Redis caching (Hypermem). Key achievements include enhancing secure provisioning via RBAC logic for 10,000+ users and engineering a bulk user creation feature, enabling the batch provisioning of over 10,000 users. Designed database schemas, implemented modular RESTful APIs, and actively participated in architectural design discussions and code reviews across the team.</span>
+      </div>
+    </div>
+
+    <!-- Experience 2 -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content slide-in-right">
+        <h3>Project Trainee – Zoho</h3>
+        <span class="date">Aug 2022 – May 2023</span>
+        <p>Chennai, India</p>
+        <span class="know-more">Enhanced the ManageEngine M365 Manager Plus product with full-stack features, specializing in Microsoft 365 and Exchange Online management and reporting. Developed core User Management modules and back-end services for dynamic report generation and real-time activity monitoring. Utilized Ember.js on the frontend and Java with Zoho's custom framework on the backend.</span>
+      </div>
+    </div>
+
+    <!-- Experience 3 -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content slide-in-left">
+        <h3>Developer Intern – Zoho</h3>
+        <span class="date">Apr 2022 – Jun 2022</span>
+        <p>Chennai, India</p>
+        <span class="know-more">Converted a CLI-based Todo Manager into a web application hosted on Apache Tomcat, integrated with SQL for task persistence. Implemented custom OTP-based user login using third-party email and SMS services. This project laid the foundation for understanding backend APIs, secure auth flows, and scalable architecture on enterprise-grade platforms.</span>
+      </div>
+    </div>
+
+    <!-- Experience 4 -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content slide-in-right">
+        <h3>Web Developer Intern – Labved Technologies</h3>
+        <span class="date">Sep 2020 – Mar 2021</span>
+        <p>Chennai, India</p>
+        <span class="know-more">Joined as a full-stack intern and contributed to UI/UX design, form validation, and dynamic form generation. Designed NoSQL schemas for MongoDB-based storage, connected it to frontend modules using Node.js and Express. Focused on usability, responsiveness, and modular code practices as part of the core development team.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CSS -->
+<style>
+  .timeline {
+    position: relative;
+    margin: 20px 0;
+    padding-left: 40px;
+    border-left: 2px solid #999;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+  }
+
+  .timeline-dot {
+    width: 16px;
+    height: 16px;
+    background-color: #00ffe0;
+    border-radius: 50%;
+    position: absolute;
+    left: -9px;
+    top: 6px;
+    box-shadow: 0 0 6px rgba(0, 255, 224, 0.7);
+  }
+
+  .timeline-content {
+    background-color: #121212;
+    padding: 20px;
+    border-radius: 10px;
+    color: #ccc;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+    position: relative;
+  }
+
+  .timeline-content h3 {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .timeline-content .date {
+    font-size: 0.9rem;
+    color: #888;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .know-more {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    color: #aaa;
+    transition: max-height 0.5s ease;
+    margin-top: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .timeline-content:hover .know-more {
+    max-height: 300px;
+  }
+
+  @media (max-width: 700px) {
+    .timeline {
+      padding-left: 20px;
+    }
+
+    .timeline-content {
+      padding: 16px;
+    }
+  }
+</style>
+
+
+<!-- Achievements Section -->
+<section class="achievements" id="achievements">
+  <div class="section-title" style="margin-bottom:32px;">Achievements</div>
+  <div class="achievement-grid">
+
+    <!-- Achievement 1 -->
+    <div class="achievement-card slide-in-left">
+      <h3>IEEE RAS Chairperson</h3>
+      <p>
+        Led the IEEE Robotics and Automation Society student chapter for 2 years. Built and maintained the chapter’s website, organized 5 impactful tech events, and secured a $500 grant to support student-driven innovation and outreach programs.
+      </p>
+    </div>
+
+    <!-- Achievement 2 -->
+    <div class="achievement-card slide-in-right">
+      <h3>IEEEXtreme 15.0 – Indian Rank 408</h3>
+      <p>
+        Served as Team Leader in IEEEXtreme 15.0, a 24-hour global competitive programming challenge. Achieved a national rank of 408 among thousands of participants by solving complex algorithmic problems in a highly time-constrained environment.
+      </p>
+    </div>
+
+  </div>
+</section>
+<style>
+/* Achievements Section */
+.achievements {
+  padding: 60px 20px;
+  background-color: #0a0a0a;
+  color: #eee;
+}
+
+.achievement-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.achievement-card {
+  background: rgba(18, 18, 18, 0.8);
+  border-left: 4px solid #00ffe0;
+  padding: 24px 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 255, 224, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.achievement-card h3 {
+  font-size: 1.25rem;
+  color: #00ffe0;
+  margin-bottom: 12px;
+}
+
+.achievement-card p {
+  font-size: 0.95rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.achievement-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px rgba(0, 255, 224, 0.15);
+}
+
+@media (max-width: 900px) {
+  .achievement-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+ <!-- Fun Footer Section -->
+    <footer class="fun-footer" id="contact">
+        <div class="footer-quote">
+            <span>“Code is like humor. When you have to explain it, it’s bad.”</span>
+            <span style="font-size:1.1rem; color:var(--muted); display:block; margin-top:6px;">— Cory House</span>
+        </div>
+        <div class="footer-contact">
+            <a href="mailto:saidasaradharam9@gmail.com" title="Email"><i class="fas fa-envelope"></i> saidasaradharam9@gmail.com</a>
+            <a href="tel:+917871802093" title="Phone"><i class="fas fa-phone"></i> +91 7871802093</a>
+            <a href="https://www.linkedin.com/in/sai-dasaradharam-g/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        </div>
+    </footer>
+    <style>
+    .fun-footer {
+        width: 100%;
+        background: linear-gradient(90deg, #00ffe71a 0%, var(--bg2) 100%);
+        color: var(--text);
+        padding: 38px 0 24px 0;
+        text-align: center;
+        border-top: 1px solid var(--border);
+        box-shadow: 0 -2px 24px #00ffe71a;
+        margin-top: 60px;
+        position: relative;
+        z-index: 10;
+        font-family: inherit;
+        animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 0.2s both;
+    }
+    .footer-quote {
+        font-size: 1.18rem;
+        font-style: italic;
+        color: var(--muted);
+        margin-bottom: 18px;
+        letter-spacing: 0.2px;
+        text-shadow: 0 2px 12px #00ffe733;
+        animation: popIn 1.1s cubic-bezier(.77,0,.18,1) 0.3s both;
+    }
+    .footer-contact {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+        font-size: 1.08rem;
+        animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 0.5s both;
+    }
+    .footer-contact a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s, text-shadow 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 10px;
+        border-radius: 6px;
+    }
+    .footer-contact a:hover {
+        color: #000000;
+        background: var(--accent);
+        text-shadow: 0 2px 12px #00ffe733;
+    }
+    .footer-contact i {
+        font-size: 1.15em;
+        opacity: 0.8;
+    }
+    @media (max-width: 600px) {
+        .fun-footer {
+            padding: 24px 2px 14px 2px;
+        }
+        .footer-contact {
+            gap: 12px;
+            font-size: 0.98rem;
+            flex-direction: column;
+        }
+        .footer-quote {
+            font-size: 1rem;
+        }
+    }
+    </style>
+
+    <style>
+    .projects, .experience, .contact {
+        max-width: 1100px;
+        margin: 0 auto 80px auto;
+        padding: 60px 0 0 0;
+        animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) both;
+    }
+    .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+    }
+    .project-card {
+        background: var(--card);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        padding: 32px 28px 28px 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: 170px;
+        position: relative;
+        transition: box-shadow 0.3s, border-color 0.3s, transform 0.2s;
+        z-index: 1;
+        animation: cardFadeIn 1.2s cubic-bezier(.77,0,.18,1) both;
+    }
+    .project-card:hover {
+        box-shadow: 0 8px 40px #00ffe733;
+        border-color: var(--accent);
+        transform: translateY(-6px) scale(1.025);
+    }
+    .project-card h3 {
+        font-size: 1.25rem;
+        color: var(--accent);
+        margin-bottom: 10px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+    .project-card p {
+        color: #b6f0e6;
+        font-size: 1.05rem;
+        margin-bottom: 18px;
+        line-height: 1.5;
+    }
+    .view-more {
+        color: var(--muted);
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+        transition: color 0.2s;
+    }
+    .view-more:hover {
+        color: var(--accent);
+        text-decoration: underline;
+    }
+    .slide-in-left {
+        animation: slideInLeft 1.1s cubic-bezier(.77,0,.18,1) both;
+    }
+    .slide-in-right {
+        animation: slideInRight 1.1s cubic-bezier(.77,0,.18,1) both;
+    }
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-60px);}
+        to { opacity: 1; transform: translateX(0);}
+    }
+    @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(60px);}
+        to { opacity: 1; transform: translateX(0);}
+    }
+    .contact-info {
+        background: var(--card);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        padding: 28px 24px;
+        max-width: 420px;
+        margin: 0 auto;
+        text-align: left;
+        animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 0.2s both;
+    }
+    .contact-info p {
+        margin-bottom: 14px;
+        color: #e0e0e0;
+        font-size: 1.08rem;
+    }
+    .contact-info a {
+        color: var(--accent);
+        text-decoration: none;
+        transition: text-decoration 0.2s, color 0.2s;
+    }
+    .contact-info a:hover {
+        text-decoration: underline;
+        color: var(--muted);
+    }
+    @media (max-width: 900px) {
+        .projects-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+        .projects, .experience, .contact {
+            padding: 36px 8px 0 8px;
+        }
+    }
+    @media (max-width: 600px) {
+        .projects, .experience, .contact {
+            padding: 24px 2px 0 2px;
+            margin-bottom: 40px;
+        }
+        .project-card {
+            padding: 16px 8px 14px 8px;
+            min-height: 120px;
+        }
+        .contact-info {
+            padding: 14px 6px;
+        }
+    }
+    </style>
+</body>
+</html>
+
+
+
+
+
